@@ -1,8 +1,8 @@
 name: N1-OpenWrt-CI
 
 on:
-#  schedule:
-#    - cron: '00 20 * * *'
+  schedule:
+    - cron: '00 20 * * *'
   repository_dispatch:
     types: run
     
@@ -55,6 +55,9 @@ jobs:
           CONFIG_TARGET_armvirt=y
           CONFIG_TARGET_armvirt_64=y
           CONFIG_TARGET_armvirt_64_DEVICE_Phicomm-n1=y
+          # CONFIG_TARGET_ROOTFS_CPIOGZ is not set
+          # CONFIG_TARGET_ROOTFS_INITRAMFS is not set
+          # CONFIG_TARGET_ROOTFS_SQUASHFS is not set
           # CONFIG_PACKAGE_chinadns-ng is not set
           # CONFIG_PACKAGE_luci-app-autoreboot is not set
           # CONFIG_PACKAGE_luci-app-vsftpd is not set
