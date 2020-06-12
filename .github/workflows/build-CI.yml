@@ -35,6 +35,8 @@ jobs:
         run: |
           cd lede
           
+          git clone https://github.com/kenzok8/openwrt-packages.git package/openwrt-packages
+git clone https://github.com/kenzok8/small.git package/small
           git clone https://github.com/tuanqing/lede-mod
           git clone https://github.com/tuanqing/install-program package/install-program
           svn co https://github.com/Lienol/openwrt-package/trunk/lienol/luci-theme-bootstrap-mod package/luci-theme-bootstrap-mod
