@@ -30,8 +30,8 @@ env:
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   SSH_ACTIONS: false
-  UPLOAD_FIRMWARE: true
-  UPLOAD_DOCKER: true
+  UPLOAD_FIRMWARE: false
+  UPLOAD_DOCKER: false
   TZ: Asia/Shanghai
 
 jobs:
@@ -141,3 +141,36 @@ jobs:
         name: docker-n1
         path: n1/opt/imgs
       
+    - name: Build firmware
+      run: |
+        cp openwrt/bin/targets/*/*/*.tar.gz ./openwrt
+        sudo ./make -d
+        cd out
+        i=0
+        kernels=("4.18.7" "4.19.106" "5.4.43")
+        for x in ${kernels[*]}; do
+          cd $x
+          filename=$(ls)
+          filename=${filename%.*}
+          gzip *.img
+          cd ../
+          echo "::set-env name=firmware_$((++i))::$filename"
+        done
+          
+    - name: Upload firmware @ kernel 4.18.7
+      uses: actions/upload-artifact@master
+      with:
+        name: ${{ env.firmware_1 }}
+        path: out/4.18.7
+      
+    - name: Upload firmware @ kernel 4.19.106
+      uses: actions/upload-artifact@master
+      with:
+        name: ${{ env.firmware_2 }}
+        path: out/4.19.106
+      
+    - name: Upload firmware @ kernel 5.4.43
+      uses: actions/upload-artifact@master
+      with:
+        name: ${{ env.firmware_3 }}
+        path: out/5.4.43
