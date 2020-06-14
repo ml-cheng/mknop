@@ -79,7 +79,6 @@ jobs:
           CONFIG_DOCKER_NET_MACVLAN=y
           CONFIG_PACKAGE_luci-theme-netgear=y
           CONFIG_BRCMFMAC_SDIO=y
-          CONFIG_PACKAGE_luci-app-haproxy-tcp=y
           EOF
 
           make defconfig
