@@ -2,7 +2,7 @@ name: N1-OpenWrt-CI
 
 on:
   schedule:
-    - cron: '00 02 * * *'
+    - cron: '20 07 * * *'
   repository_dispatch:
     types: run
     
