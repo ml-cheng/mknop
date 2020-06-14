@@ -27,73 +27,9 @@ jobs:
           sudo -E apt-get -qq autoremove --purge
           sudo -E apt-get -qq clean
 
-      - name: Clone Lean's openwrt
-        run: |
-          git clone https://github.com/coolsnowwolf/lede
-
-      - name: Install feeds
-        run: |
-          cd lede
-          
-          git clone https://github.com/kenzok8/openwrt-packages.git package/openwrt-packages
-          git clone https://github.com/kenzok8/small.git package/small
-          git clone https://github.com/tuanqing/lede-mod
-          git clone https://github.com/tuanqing/install-program package/install-program
-          git apply lede-mod/lede/*.patch
-          
-          ./scripts/feeds update -a
-          ./scripts/feeds install -a
-          
-          git apply lede-mod/luci/*.patch --directory=feeds/luci
-          
-      - name: Make config
-        run: |
-          cd lede
-          cat > .config << EOF
-          CONFIG_TARGET_armvirt=y
-          CONFIG_TARGET_armvirt_64=y
-          CONFIG_TARGET_armvirt_64_DEVICE_Phicomm-n1=y
-          # CONFIG_PACKAGE_chinadns-ng is not set
-          # CONFIG_PACKAGE_luci-app-autoreboot is not set
-          # CONFIG_PACKAGE_luci-app-vsftpd is not set
-          # CONFIG_PACKAGE_vsftpd-alt is not set
-          # CONFIG_PACKAGE_luci-lib-fs is not set
-          # CONFIG_PACKAGE_ttyd is not set
-          # CONFIG_PACKAGE_luci-app-ttyd is not set
-          # CONFIG_PACKAGE_luci-app-adbyby-plus is not set
-          # CONFIG_PACKAGE_luci-app-flowoffload is not set
-          # CONFIG_PACKAGE_luci-app-wol is not set
-          # CONFIG_PACKAGE_luci-app-nlbwmon is not set
-          # CONFIG_PACKAGE_nlbwmon is not set
-          # CONFIG_PACKAGE_luci-app-ramfree is not set					   
-          # CONFIG_PACKAGE_luci-app-ddns is not set						
-          # CONFIG_PACKAGE_luci-app-arpbind is not set
-          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG is not set
-          CONFIG_PACKAGE_luci-app-passwall=y
-          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan=y
-          CONFIG_UnblockNeteaseMusic_NodeJS=y
-          CONFIG_PACKAGE_UnblockNeteaseMusic=y
-          CONFIG_DOCKER_NET_OVERLAY=y
-          CONFIG_DOCKER_NET_MACVLAN=y
-          CONFIG_PACKAGE_luci-theme-netgear=y
-          CONFIG_BRCMFMAC_SDIO=y
-          EOF
-
-          make defconfig
-          ./scripts/feeds update -a
-          cat .config
-
-      - name: Compile openwrt
-        run: |
-          cd lede
-          make download -j8
-          make -j$(nproc) || make -j1 V=s
-
       - name: Build firmware
         run: |
-          cp lede/bin/targets/*/*/*.tar.gz ./openwrt
           sudo ./make -d
-          cp lede/.config out/config.seed
 
           cd out
           i=0
@@ -125,8 +61,3 @@ jobs:
           name: ${{ env.firmware_3 }}
           path: out/5.4.43
 
-      - name: Upload config file
-        uses: actions/upload-artifact@master
-        with:
-          name: config
-          path: out/config.seed
