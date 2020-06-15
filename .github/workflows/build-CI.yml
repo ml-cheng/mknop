@@ -1,8 +1,8 @@
 name: N1-OpenWrt-CI
 
 on:
-#  schedule:
-#    - cron: '00 08 * * *'
+  schedule:
+    - cron: '40 20 * * *'
   repository_dispatch:
     types: run
     
@@ -41,8 +41,6 @@ jobs:
           
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-          
-          git apply lede-mod/luci/*.patch --directory=feeds/luci
           
       - name: Make config
         run: |
@@ -84,6 +82,7 @@ jobs:
           cd lede
           make download -j8
           make -j$(nproc) || make -j1 V=s
+          
       - name: Build firmware
         run: |
           cp lede/bin/targets/*/*/*.tar.gz ./openwrt
