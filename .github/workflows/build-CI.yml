@@ -73,6 +73,7 @@ jobs:
           CONFIG_DOCKER_NET_MACVLAN=y
           CONFIG_PACKAGE_luci-theme-netgear=y
           CONFIG_BRCMFMAC_SDIO=y
+          CONFIG_PACKAGE_luci-mod-rpc=y
           EOF
           make defconfig
           ./scripts/feeds update -a
