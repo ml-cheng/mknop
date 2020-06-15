@@ -145,6 +145,8 @@ jobs:
       run: |
         cp lede/bin/targets/*/*/*.tar.gz ./openwrt
         sudo ./make -d
+        cp lede/.config out/config.seed
+        
         cd out
         i=0
         kernels=("4.18.7" "4.19.106" "5.4.43")
@@ -174,3 +176,9 @@ jobs:
       with:
         name: ${{ env.firmware_3 }}
         path: out/5.4.43
+
+    - name: Upload config file
+      uses: actions/upload-artifact@master
+      with:
+        name: config
+        path: out/config.seed
