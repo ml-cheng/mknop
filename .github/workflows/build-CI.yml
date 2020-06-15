@@ -48,7 +48,7 @@ jobs:
           cat > .config << EOF
           CONFIG_TARGET_armvirt=y
           CONFIG_TARGET_armvirt_64=y
-          CONFIG_TARGET_armvirt_64_DEVICE_Phicomm-n1=y
+          CONFIG_TARGET_armvirt_64_Default=y
           # CONFIG_PACKAGE_chinadns-ng is not set
           # CONFIG_PACKAGE_luci-app-autoreboot is not set
           # CONFIG_PACKAGE_luci-app-vsftpd is not set
