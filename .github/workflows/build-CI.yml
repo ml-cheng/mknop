@@ -2,7 +2,7 @@ name: N1-OpenWrt-CI
 
 on:
   schedule:
-    - cron: '10 05 * * *'
+    - cron: '45 00 * * *'
   repository_dispatch:
     types: run
     
@@ -35,7 +35,7 @@ jobs:
           
           git clone https://github.com/kenzok8/openwrt-packages.git package/openwrt-packages
           git clone https://github.com/kenzok8/small.git package/small
-          git clone https://github.com/tuanqing/lede-mod
+          git clone https://github.com/ml-cheng/lede-mod
           git clone https://github.com/tuanqing/install-program package/install-program
           git apply lede-mod/lede/*.patch
           
@@ -48,7 +48,7 @@ jobs:
           cat > .config << EOF
           CONFIG_TARGET_armvirt=y
           CONFIG_TARGET_armvirt_64=y
-          CONFIG_TARGET_armvirt_64_Default=y
+          CONFIG_TARGET_armvirt_64_DEVICE_Phicomm-n1=y
           # CONFIG_PACKAGE_chinadns-ng is not set
           # CONFIG_PACKAGE_luci-app-autoreboot is not set
           # CONFIG_PACKAGE_luci-app-vsftpd is not set
