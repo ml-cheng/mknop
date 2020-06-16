@@ -76,6 +76,7 @@ jobs:
           make defconfig
           ./scripts/feeds update -a
           cat .config
+          
       - name: Compile openwrt
         run: |
           cd lede
@@ -98,6 +99,7 @@ jobs:
             cd ../
             echo "::set-env name=firmware_$((++i))::$filename"
           done
+          
       - name: Upload firmware @ kernel 4.18.7
         uses: actions/upload-artifact@master
         with:
