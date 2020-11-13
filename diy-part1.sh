@@ -8,15 +8,6 @@
 # Blog: https://p3terx.com
 #=============================================================
 
-cd lede
-
-(
-    cd package
-    git clone https://github.com/tuanqing/install-program
-    git clone https://github.com/tuanqing/openwrt-mentohust
-    git clone https://github.com/tuanqing/luci-app-mentohust
-)
-
 # Uncomment a feed source
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
@@ -24,3 +15,8 @@ cd lede
 sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 #sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
+
+cd package
+git clone https://github.com/tuanqing/install-program
+git clone https://github.com/tuanqing/openwrt-mentohust
+git clone https://github.com/tuanqing/luci-app-mentohust
