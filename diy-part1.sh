@@ -8,6 +8,15 @@
 # Blog: https://p3terx.com
 #=============================================================
 
+cd lede
+
+(
+    cd package
+    git clone https://github.com/tuanqing/install-program
+    git clone https://github.com/tuanqing/openwrt-mentohust
+    git clone https://github.com/tuanqing/luci-app-mentohust
+)
+
 # Uncomment a feed source
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
