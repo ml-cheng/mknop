@@ -9,6 +9,8 @@ cd lede
 )
 
 cat >feeds.conf.default <<-EOF
+# src-git luci https://git.openwrt.org/project/luci.git;openwrt-19.07
+# src-git packages https://git.openwrt.org/feed/packages.git
 src-git kenzo https://github.com/kenzok8/openwrt-packages.git
 src-git small https://github.com/kenzok8/small.git
 EOF
