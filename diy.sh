@@ -17,7 +17,7 @@ src-git routing https://git.openwrt.org/feed/routing.git
 src-git telephony https://git.openwrt.org/feed/telephony.git
 src-git helloworld https://github.com/fw876/helloworld.git
 src-git kenzo https://github.com/kenzok8/openwrt-packages.git
-src-git kenzo https://github.com/kenzok8/small.git
+src-git small https://github.com/kenzok8/small.git
 EOF
 
 rm -rf package/lean/{samba4,luci-app-samba4,luci-app-ttyd}
