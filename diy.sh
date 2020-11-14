@@ -5,8 +5,6 @@ cd lede
 (
     cd package
     git clone https://github.com/tuanqing/install-program package/install-program
-    git clone https://github.com/kenzok8/openwrt-packages.git
-    git clone https://github.com/kenzok8/small.git
     echo "add other app well feeds.conf.default success"
 )
 
@@ -18,6 +16,7 @@ src-git packages https://github.com/Lienol/openwrt-packages.git;main
 src-git routing https://git.openwrt.org/feed/routing.git
 src-git telephony https://git.openwrt.org/feed/telephony.git
 src-git helloworld https://github.com/fw876/helloworld.git
+src-git kenzo https://github.com/kenzok8/openwrt-packages.git
 EOF
 
 rm -rf package/lean/{samba4,luci-app-samba4,luci-app-ttyd,luci-theme-argon,luci-lib-docker}
