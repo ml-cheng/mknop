@@ -9,28 +9,12 @@ cd lede
 )
 
 cat >feeds.conf.default <<-EOF
-# src-git luci https://git.openwrt.org/project/luci.git;openwrt-19.07
-# src-git packages https://git.openwrt.org/feed/packages.git
-src-git luci https://github.com/Lienol/openwrt-luci.git;18.06
-src-git packages https://github.com/Lienol/openwrt-packages.git;main
-src-git routing https://git.openwrt.org/feed/routing.git
-src-git telephony https://git.openwrt.org/feed/telephony.git
-src-git helloworld https://github.com/fw876/helloworld.git
 src-git kenzo https://github.com/kenzok8/openwrt-packages.git
 src-git small https://github.com/kenzok8/small.git
 EOF
 
-rm -rf package/lean/{samba4,luci-app-samba4,luci-app-ttyd}
-svn co https://github.com/Lienol/openwrt/branches/main/package/libs/{libaudit,musl-fts,libsemanage} package/libs
-
 ./scripts/feeds update -a
 ./scripts/feeds install -a
-
-zzz="package/lean/default-settings/files/zzz-default-settings"
-sed -i 's/samba/samba4/' $zzz
-# sed -i 's#openwrt.proxy.ustclug.org#mirrors.bfsu.edu.cn\\/openwrt#' $zzz
-sed -i "/openwrt_luci/i sed -i '/Lienol/d' /etc/opkg/distfeeds.conf" $zzz
-sed -i "/openwrt_luci/i sed -i '/helloworld/d' /etc/opkg/distfeeds.conf" $zzz
 
 packages=" \
 brcmfmac-firmware-43430-sdio brcmfmac-firmware-43455-sdio kmod-brcmfmac wpad \
@@ -39,6 +23,7 @@ kmod-usb2 kmod-usb3 kmod-usb-storage kmod-usb-storage-extras kmod-usb-storage-ua
 blkid lsblk parted fdisk cfdisk losetup resize2fs tune2fs pv unzip \
 lscpu htop iperf3 curl lm-sensors install-program 
 "
+
 sed -i '/FEATURES+=/ { s/cpiogz //; s/ext4 //; s/ramdisk //; s/squashfs //; }' \
     target/linux/armvirt/Makefile
 for x in $packages; do
