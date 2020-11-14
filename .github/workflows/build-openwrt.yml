@@ -28,8 +28,7 @@ env:
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: .config
-  DIY_P1_SH: diy-part1.sh
-  DIY_P2_SH: diy-part2.sh
+  DIY_SH: diy.sh
   SSH_ACTIONS: false
   UPLOAD_FIRMWARE: false
   UPLOAD_DOCKER: false
@@ -61,8 +60,8 @@ jobs:
       env:
         CONFIG: '.github/config'
       run: |
-          chmod +x $DIY_P1_SH
-          $GITHUB_WORKSPACE/$DIY_P1_SH
+          chmod +x $DIY_SH
+          $GITHUB_WORKSPACE/$DIY_SH
           
     - name: Compile openwrt
       run: |
