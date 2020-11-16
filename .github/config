@@ -5,7 +5,6 @@ cd lede
 (
     cd package
     git clone https://github.com/tuanqing/install-program package/install-program
-    git clone https://github.com/jerrykuku/luci-theme-argon -b 18.06
     git clone https://github.com/lisaac/luci-lib-docker
     git clone https://github.com/lisaac/luci-app-dockerman
     echo "add other app well feeds.conf.default success"
@@ -16,14 +15,11 @@ cat >feeds.conf.default <<-EOF
 # src-git packages https://git.openwrt.org/feed/packages.git
 src-git kenzo https://github.com/kenzok8/openwrt-packages.git
 src-git small https://github.com/kenzok8/small
-src-git luci https://github.com/Lienol/openwrt-luci.git;18.06
-src-git packages https://github.com/Lienol/openwrt-packages.git;main
 src-git routing https://git.openwrt.org/feed/routing.git
 src-git telephony https://git.openwrt.org/feed/telephony.git
+src-git packages https://github.com/coolsnowwolf/packages
+src-git luci https://github.com/coolsnowwolf/luci
 EOF
-
-rm -rf package/lean/{samba4,luci-app-samba4,luci-app-ttyd,luci-theme-argon,luci-lib-docker}
-svn co https://github.com/Lienol/openwrt/branches/main/package/libs/{libaudit,musl-fts,libsemanage} package/libs
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
@@ -61,13 +57,14 @@ CONFIG_TARGET_armvirt_64=y
 CONFIG_TARGET_armvirt_64_Default=y
 ## luci app
 CONFIG_PACKAGE_luci-app-ttyd=y
-CONFIG_PACKAGE_luci-app-dockerman=y
+CONFIG_PACKAGE_docker-ce=y
+CONFIG_PACKAGE_luci-app-docker=y
 CONFIG_PACKAGE_luci-app-passwall=y
 CONFIG_PACKAGE_luci-app-cifs-mount=y
 CONFIG_PACKAGE_luci-app-samba4=y
 ## luci theme
 CONFIG_PACKAGE_luci-theme-bootstrap-mod=y
-CONFIG_PACKAGE_luci-theme-argon=y
+CONFIG_PACKAGE_luci-theme-netgear=y
 ## remove
 # CONFIG_PACKAGE_luci-app-arpbind is not set
 # CONFIG_PACKAGE_luci-app-autoreboot is not set
