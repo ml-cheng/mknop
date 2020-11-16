@@ -91,17 +91,6 @@ jobs:
       run: |
         cp ${{ env.FIRMWARE }}/* n1      
      
-    - name: Image - build
-      run: |
-        cd n1
-        sudo bash build.sh
-        
-    - name: Upload - push to artifact file 
-      uses: actions/upload-artifact@master
-      if: env.UPLOAD_DOCKER == 'true' && !cancelled()  
-      with:
-        name: docker-n1
-        path: n1/opt/imgs
       
     - name: Build firmware
       run: |
