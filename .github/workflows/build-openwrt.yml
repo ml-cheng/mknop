@@ -86,11 +86,6 @@ jobs:
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
-
-    - name: Docker file - copy Docker file
-      run: |
-        cp ${{ env.FIRMWARE }}/* n1      
-     
       
     - name: Build firmware
       run: |
